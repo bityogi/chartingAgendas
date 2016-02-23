@@ -38,72 +38,7 @@ agendaApp.controller('TabsCtrl', ['$scope', '$templateRequest', '$sce', '$compil
     };
 }]);
 
-agendaApp.controller('agendaChartsCtrl', ['$scope', '_', '$http', function ($scope, _, $http) {
 
-    function getAvailableAgendas() {
-        //if (this.agendas.availableAgendas === null) {
-        console.log('Getting Agendas');
-        $http.get('/data/agendas.json').then(function onSuccess(response) {
-            console.log(response.data.availableAgendas);
-            $scope.agendas.availableAgendas = response.data.availableAgendas;
-        }, function onFailure(err) {});
-        //}
-    }
-
-    $scope.agendas = {
-        selectedAgenda: null,
-
-        availableAgendas: null
-    };
-
-    getAvailableAgendas();
-
-    $scope.getChartData = function (meeting) {
-
-        $('#container').highcharts({
-            chart: {
-                type: 'bar'
-            },
-            title: {
-                text: 'Procurement for Charts for EMIS'
-            },
-            xAxis: {
-                categories: [' '] //['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'Agenda Timeline'
-                }
-            },
-            legend: {
-                reversed: true
-            },
-            plotOptions: {
-                series: {
-                    stacking: 'normal'
-                }
-            },
-            series: [{
-                name: 'Submit to Board',
-                data: [3] //[3, 4, 4, 2, 5]
-            }, {
-                name: 'GM Reviews',
-                data: [3] //[3, 4, 4, 2, 5]
-            }, {
-                name: 'Revisions',
-                data: [3] //[3, 4, 4, 2, 5]
-            }, {
-                name: 'AGM Reviews',
-                data: [2] //[2, 2, 3, 2, 1]
-            }, {
-                name: 'Create Content',
-                data: [5] //[5, 3, 4, 7, 2]
-            }],
-            colors: ['#2f7ed8', '#0d233a', '#0d233a', '#0d233a', '#0d233a']
-        });
-    };
-}]);
 
 agendaApp.controller('meetingChartsCtrl', ['$scope', function ($scope) {}]);
 

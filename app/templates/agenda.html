@@ -1,7 +1,7 @@
 <div id="agendaCharts" ng-controller="agendaChartsCtrl">
   <h1>Charts by Agenda</h1>
 
-  <select name="agendas" id="agendas" ng-model="agendas.selectedAgenda" ng-change="getChartData(agenda)">
+  <select name="agendas" id="agendas" ng-model="agendas.selectedAgenda" ng-change="getChartData()">
 
     <option value="{{agenda.id}}" ng-repeat="agenda in agendas.availableAgendas">{{agenda.title}}</option>
 
@@ -9,7 +9,12 @@
 
   <br>
 
-  
+  <div>
+    <p ng-show="meetingIDForAgenda">MeetingID: {{meetingIDForAgenda}}</p>
+    <p ng-show="typeOfAgenda">Agenda Type: {{typeOfAgenda}}</p>
+    <p ng-show="agendaStatus">Agenda Status: {{agendaStatus}}</p>
+  </div>
+
 
   <div id="container" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
 
