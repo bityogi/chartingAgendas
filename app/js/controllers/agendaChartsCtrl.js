@@ -69,46 +69,51 @@ agendaApp.controller('agendaChartsCtrl', ['$scope', '_', '$http', '$q', function
 
           $('#container').highcharts({
             chart: {
-              type: 'bar'
-          },
-          title: {
-              text: agenda.title,
-          },
-          xAxis: {
-              categories: [' '] //['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
-          },
-          yAxis: {
-              min: 0,
-              title: {
-                  text: 'Agenda Timeline'
-              }
-          },
-          legend: {
-              reversed: true
-          },
-          plotOptions: {
-              series: {
-                  stacking: 'normal'
-              }
-          },
-          series: seriesData,
-          // series: [{
-          //     name: 'Submit to Board',
-          //     data: [3] //[3, 4, 4, 2, 5]
-          // }, {
-          //     name: 'GM Reviews',
-          //     data: [3] //[3, 4, 4, 2, 5]
-          // }, {
-          //     name: 'Revisions',
-          //     data: [3] //[3, 4, 4, 2, 5]
-          // }, {
-          //     name: 'AGM Reviews',
-          //     data: [2] //[2, 2, 3, 2, 1]
-          // }, {
-          //     name: 'Create Content',
-          //     data: [5] //[5, 3, 4, 7, 2]
-          // }],
-          colors: ['#2f7ed8', '#0d233a', '#0d233a', '#0d233a', '#0d233a']
+                type: 'areaspline'
+            },
+            title: {
+                text: agenda.title
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'left',
+                verticalAlign: 'top',
+                x: 100,
+                y: 100,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+            },
+            xAxis: {
+                categories: seriesNames,
+                plotBands: [{ // visualize the weekend
+                    from: 4.5,
+                    to: 6.5,
+                    color: 'rgba(68, 170, 213, .2)'
+                }]
+            },
+            yAxis: {
+                title: {
+                    text: 'Days'
+                }
+            },
+            tooltip: {
+                shared: true,
+                valueSuffix: ' units'
+            },
+            credits: {
+                enabled: false
+            },
+            plotOptions: {
+                areaspline: {
+                    fillOpacity: 0.5
+                }
+            },
+            series: [{
+                name: agenda.title,
+                data: seriesDataValues
+            }]
+          //colors: ['#2f7ed8', '#0d233a', '#0d233a', '#0d233a', '#0d233a']
 
           });
 
