@@ -1,0 +1,19 @@
+{
+  "availableMeetings": [ {
+    "id": 1,
+    "title": "Board Meeting for May",
+    "date": "5/5/2016"
+  },
+  {
+    "id": 2,
+    "title": "Board Meeting for April",
+    "date": "4/5/2016"
+  },
+  {
+    "id": 3,
+    "title": "Board Meeting for March",
+    "date": "3/5/2016"
+  },
+
+  ]
+}

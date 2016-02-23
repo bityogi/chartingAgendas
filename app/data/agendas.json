@@ -1,0 +1,34 @@
+{
+  "availableAgendas": [
+      {
+        "id": 1,
+        "title": "Procurement for Charts for EMIS",
+        "meetingID" : 1,
+        "status": "Agenda Created",
+        "statusCode": 10,
+        "officeID": 2,
+        "type": "Procurement Resolution",
+        "committee": "Business Management"
+      },
+      {
+        "id": 2,
+        "title": "Business Management Agenda",
+        "meeting" : 2,
+        "status": "Review Completed",
+        "statusCode": 20,
+        "officeID": 2,
+        "type": "Procurement Resolution",
+        "committee": "Business Management"
+      },
+      {
+        "id": 3,
+        "title": "Op and Safety Agenda",
+        "meeting" : 2,
+        "status": "Agenda Created",
+        "statusCode": 10,
+        "officeID": 1,
+        "type": "Procurement Resolution",
+        "committee": "Operations and Safety"
+      }
+    ]
+}

@@ -1,0 +1,28 @@
+{
+        "Agenda Created" : 10,
+
+        "Adding Content" : 20,
+
+        "Content Added" : 30,
+
+        "Review Started" : 40,
+
+        "Review Completed" : 50,
+
+        "Published for Stakeholder Review" : 60,
+
+        "Stakeholder Review Complete" : 70,
+
+        "DGM/CBSS Reviews completed" : 80,
+
+        "Submitted for GM Approval" : 90,
+
+        "Ready for Digital Signatures" : 100,
+
+        "Getting Digital Signatures" : 110,
+
+        "Ready to Publish" : 120,
+
+        "Published to Board" : 130
+
+}
