@@ -1,14 +1,4 @@
-agendaApp.controller('agendaChartsCtrl', ['$scope', '_', '$http', '$q', function ($scope, _, $http, $q) {
-
-    function getAvailableAgendas() {
-        //if (this.agendas.availableAgendas === null) {
-        $http.get('/data/agendas.json').then(function onSuccess(response) {
-            $scope.agendas.availableAgendas = response.data.availableAgendas;
-        }, function onFailure(err) {
-            //Not Implemented
-        });
-        //}
-    }
+agendaApp.controller('agendaChartsCtrl', ['$scope', '_', '$q', 'chartData', function ($scope, _, $q, chartData) {
 
     $scope.agendas = {
         selectedAgenda: null,
@@ -16,40 +6,9 @@ agendaApp.controller('agendaChartsCtrl', ['$scope', '_', '$http', '$q', function
         availableAgendas: null
     };
 
-    getAvailableAgendas();
-
-    function getEventTimes(type) {
-        return $q(function (resolve, reject) {
-            // console.log('getEventTimes called.');
-            $http.get('/data/eventTimes.json').then(function onSucess(response) {
-
-                var eventTimes = _.filter(response.data, event => {
-                    return event.type === type;
-                });
-                // console.log('eventDetails:',eventTimes[0].eventDetails);
-                resolve(eventTimes[0].eventDetails);
-            }, function onFailure(err) {
-                reject(err);
-            });
-        });
-    }
-
-    function getMeetingTime(agendaMeetingID) {
-        return $q(function (resolve, reject) {
-            // console.log('getMeetingTime called.');
-            $http.get('./data/meetings.json').then(function onSuccess(response) {
-                var agendaMeeting = _.filter(response.data.availableMeetings, meeting => {
-                    return meeting.id === agendaMeetingID;
-                });
-                // console.log('agendaMeeting:', agendaMeeting);
-                var meetingDate = new Date(agendaMeeting[0].date);
-                // console.log('meetingDate:', meetingDate);
-                resolve(meetingDate);
-            }, function onFailure(err) {
-                reject(err);
-            });
-        });
-    }
+    chartData.getAvailableAgendas().then(function (agendas) {
+        $scope.agendas.availableAgendas = agendas;
+    });
 
     $scope.meetingIDForAgenda = null;
     $scope.typeOfAgenda = null;
@@ -64,8 +23,8 @@ agendaApp.controller('agendaChartsCtrl', ['$scope', '_', '$http', '$q', function
         $scope.typeOfAgenda = agenda.type;
         $scope.agendaStatus = agenda.status;
 
-        var events = getEventTimes(agenda.type);
-        var meetingTime = getMeetingTime(agenda.meetingID);
+        var events = chartData.getEventTimes(agenda.type);
+        var meetingTime = chartData.getMeetingTime(agenda.meetingID);
 
         $q.all([events, meetingTime]).then(function onSuccess(responses) {
 
