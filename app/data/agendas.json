@@ -4,8 +4,8 @@
         "id": 1,
         "title": "Procurement for Charts for EMIS",
         "meetingID" : 1,
-        "status": "Agenda Created",
-        "statusCode": 10,
+        "status": "Edit Content from Contributors",
+        "statusCode": 30,
         "officeID": 2,
         "type": "Procurement Resolution",
         "committee": "Business Management"
@@ -13,9 +13,9 @@
       {
         "id": 2,
         "title": "Business Management Agenda",
-        "meeting" : 2,
-        "status": "Review Completed",
-        "statusCode": 20,
+        "meetingID" : 3,
+        "status": "Start initial review workflow",
+        "statusCode": 40,
         "officeID": 2,
         "type": "Procurement Resolution",
         "committee": "Business Management"
@@ -23,7 +23,7 @@
       {
         "id": 3,
         "title": "Op and Safety Agenda",
-        "meeting" : 2,
+        "meetingID" : 2,
         "status": "Agenda Created",
         "statusCode": 10,
         "officeID": 1,

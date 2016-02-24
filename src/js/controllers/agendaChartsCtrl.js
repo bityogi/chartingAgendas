@@ -2,9 +2,7 @@ agendaApp.controller('agendaChartsCtrl', ['$scope', '_', '$http', '$q', function
 
     function getAvailableAgendas() {
         //if (this.agendas.availableAgendas === null) {
-        console.log('Getting Agendas');
         $http.get('/data/agendas.json').then(function onSuccess(response) {
-            console.log(response.data.availableAgendas);
             $scope.agendas.availableAgendas = response.data.availableAgendas;
         }, function onFailure(err) {
           //Not Implemented
@@ -24,19 +22,33 @@ agendaApp.controller('agendaChartsCtrl', ['$scope', '_', '$http', '$q', function
 
     function getEventTimes(type) {
       return $q(function(resolve, reject) {
-        console.log('Getting event timelines');
+        // console.log('getEventTimes called.');
         $http.get('/data/eventTimes.json').then(function onSucess(response) {
-          console.log(response.data);
 
-          var eventTimes = _.filter(response.data, (events) => { return events.type === type; });
+          var eventTimes = _.filter(response.data, (event) => { return event.type === type; });
+          // console.log('eventDetails:',eventTimes[0].eventDetails);
           resolve(eventTimes[0].eventDetails);
 
         }, function onFailure(err) {
           reject(err);
         });
       });
+    }
 
+    function getMeetingTime(agendaMeetingID) {
+      return $q(function(resolve, reject) {
+        // console.log('getMeetingTime called.');
+        $http.get('./data/meetings.json').then(function onSuccess(response) {
+          var agendaMeeting = _.filter(response.data.availableMeetings, (meeting) => { return meeting.id === agendaMeetingID; });
+          // console.log('agendaMeeting:', agendaMeeting);
+          var meetingDate = new Date(agendaMeeting[0].date);
+          // console.log('meetingDate:', meetingDate);
+          resolve(meetingDate);
 
+        }, function onFailure(err) {
+          reject(err);
+        });
+      });
     }
 
     $scope.meetingIDForAgenda = null;
@@ -51,21 +63,35 @@ agendaApp.controller('agendaChartsCtrl', ['$scope', '_', '$http', '$q', function
         $scope.agendaStatus = agenda.status;
 
         var events = getEventTimes(agenda.type);
+        var meetingTime = getMeetingTime(agenda.meetingID);
 
-        events.then(function onSuccess(eventTimes) {
+        $q.all([events, meetingTime]).then(function onSuccess(responses) {
+
+          var eventTimes = responses[0];
+          var meetingDate = responses[1];
+
+          var today = new Date();
+          var timeDifference = Math.abs(meetingDate.getTime() - today.getTime());
+          var daysDifference = Math.ceil(timeDifference / (1000 * 3600 * 24));
+
+          var targetEvents = _.filter(eventTimes, (event) => { return event.days <= daysDifference; });
+          //var target
           var seriesNames = _.map(eventTimes, 'event');
-          var seriesDataValues = _.map(eventTimes, 'duration');
+          var eventsOccured = _.filter(eventTimes, (event) => { return event.statusCode <= agenda.statusCode; });
+          var seriesDataValues = _.map(eventsOccured, 'duration');
+          var allEvents = _.map(eventTimes, 'duration');
 
-          var seriesData = [];
-
-
-          for (var i = 0; i < seriesNames.length; i++){
-            var seriesObject = {
-              name: seriesNames[i],
-              data:[seriesDataValues[i]]
-            };
-            seriesData.push(seriesObject);
-          }
+          // var seriesData = [];
+          //
+          //
+          // for (var i = 0; i < seriesNames.length; i++){
+          //   var seriesObject = {
+          //     name: seriesNames[i],
+          //     data:[seriesDataValues[i]]
+          //   };
+          //   seriesData.push(seriesObject);
+          // }
+          console.log('totalEvents: %d, targetEvents: %d', eventTimes.length, targetEvents.length);
 
           $('#container').highcharts({
             chart: {
@@ -75,6 +101,7 @@ agendaApp.controller('agendaChartsCtrl', ['$scope', '_', '$http', '$q', function
                 text: agenda.title
             },
             legend: {
+                enabled: false,
                 layout: 'vertical',
                 align: 'left',
                 verticalAlign: 'top',
@@ -87,8 +114,8 @@ agendaApp.controller('agendaChartsCtrl', ['$scope', '_', '$http', '$q', function
             xAxis: {
                 categories: seriesNames,
                 plotBands: [{ // visualize the weekend
-                    from: 4.5,
-                    to: 6.5,
+                    from: targetEvents.length,
+                    to: eventTimes.length,
                     color: 'rgba(68, 170, 213, .2)'
                 }]
             },
@@ -112,8 +139,12 @@ agendaApp.controller('agendaChartsCtrl', ['$scope', '_', '$http', '$q', function
             series: [{
                 name: agenda.title,
                 data: seriesDataValues
-            }]
-          //colors: ['#2f7ed8', '#0d233a', '#0d233a', '#0d233a', '#0d233a']
+              },{
+                name: agenda.type,
+                data: allEvents
+            }
+          ],
+          colors: ['#2f7ed8', '#ECEDEE']
 
           });
 

@@ -1,17 +1,17 @@
 [{
   "type": "Procurement Resolution",
   "eventDetails": [
-    {"event": "Create Agenda", "days": 66, "duration": 2},
-    {"event": "Start Contributor Workflow", "days": 64, "duration": 2},
-    {"event": "Edit Content from Contributors", "days": 51, "duration": 22},
-    {"event": "Start initial review workflow", "days": 29, "duration": 3},
-    {"event": "Edit Reviewers comments", "days": 26, "duration": 3},
-    {"event": "Submit to AGMs for Approval", "days": 23, "duration": 1},
-    {"event": "Submit to DGM for Approval", "days": 22, "duration": 10},
-    {"event": "Edit GM comments", "days": 12, "duration": 2},
-    {"event": "Start digital signature workflow", "days": 10, "duration": 2},
-    {"event": "Board office review", "days": 8, "duration": 2},
-    {"event": "Publish to Board", "days": 7, "duration": 1}
+    {"event": "Create Agenda", "days": 66, "duration": 2, "statusCode": 10},
+    {"event": "Start Contributor Workflow", "days": 64, "duration": 2, "statusCode": 20},
+    {"event": "Edit Content from Contributors", "days": 51, "duration": 22, "statusCode": 30},
+    {"event": "Start initial review workflow", "days": 29, "duration": 3, "statusCode": 40},
+    {"event": "Edit Reviewers comments", "days": 26, "duration": 3, "statusCode": 50},
+    {"event": "Submit to AGMs for Approval", "days": 23, "duration": 1, "statusCode": 60},
+    {"event": "Submit to DGM for Approval", "days": 22, "duration": 10, "statusCode": 70},
+    {"event": "Edit GM comments", "days": 12, "duration": 2, "statusCode": 80},
+    {"event": "Start digital signature workflow", "days": 10, "duration": 2, "statusCode": 90},
+    {"event": "Board office review", "days": 8, "duration": 2, "statusCode": 100},
+    {"event": "Publish to Board", "days": 7, "duration": 1, "statusCode": 110}
   ]
 },
 {
