@@ -15,7 +15,7 @@
     <p ng-show="agendaStatus">Agenda Status: {{agendaStatus}}</p>
   </div> -->
   <chart-directive agenda-id="{{agendas.selectedAgenda}}">
-    <div id="container" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
+    <div id="container_{{agendas.selectedAgenda}}" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
   </chart-directive>
 
 </div>

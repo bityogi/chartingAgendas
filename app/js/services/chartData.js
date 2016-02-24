@@ -13,6 +13,23 @@ agendaApp.factory('chartData', ['$http', '$q', function ($http, $q) {
     });
   };
 
+  chartDataService.getAgendasForMeeting = function getAgendasForMeeting(meeting_id) {
+
+    return $q(function (resolve, reject) {
+      console.log('getAgendasForMeeting: meeting_id=', meeting_id);
+      $http.get('/data/agendas.json').then(function onSuccess(response) {
+
+        var meetingAgendas = _.filter(response.data.availableAgendas, agenda => {
+          return agenda.meetingID == meeting_id;
+        });
+
+        resolve(meetingAgendas);
+      }, function onFailure(err) {
+        reject(err);
+      });
+    });
+  };
+
   chartDataService.getEventTimes = function getEventTimes(type) {
     return $q(function (resolve, reject) {
       // console.log('getEventTimes called.');

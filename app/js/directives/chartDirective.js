@@ -12,7 +12,7 @@ agendaApp.directive('chartDirective', ['_', '$q', 'chartData', function (_, $q, 
       console.log('Directive function was called!');
 
       scope.$watch('agendaId', function (newValue, oldValue) {
-        console.log('agenda value changed!!!');
+        console.log('agenda value changed! value=', newValue);
 
         getAgendas().then(function (agendas) {
 
@@ -24,15 +24,20 @@ agendaApp.directive('chartDirective', ['_', '$q', 'chartData', function (_, $q, 
 
       function getAgendas() {
         return $q(function (resolve, reject) {
+          console.log('chartDirective: (getAgendas) was called.');
           if (scope.availableAgendas.length === 0) {
-
+            console.log('chartDirective(getAgendas): availableAgendas = 0. Attempting getAvailableAgendas');
             chartData.getAvailableAgendas().then(function (agendas) {
+              console.log('chartDirective(getAgendas->getAvailableAgendas result:): agendas=', agendas);
               scope.availableAgendas = agendas;
+              resolve(scope.availableAgendas);
             }, function (err) {
               reject(err);
             });
+          } else {
+            console.log('chartDirective: (getAgendas) => returning availableAgendas from cache.');
+            resolve(scope.availableAgendas);
           }
-          resolve(scope.availableAgendas);
         });
       }
 
@@ -90,8 +95,9 @@ agendaApp.directive('chartDirective', ['_', '$q', 'chartData', function (_, $q, 
             //   seriesData.push(seriesObject);
             // }
             console.log('totalEvents: %d, targetEvents: %d', eventTimes.length, targetEvents.length);
+            var containerId = '#container_' + agenda_id;
 
-            $('#container').highcharts({
+            $(containerId).highcharts({
               chart: {
                 type: 'areaspline'
               },

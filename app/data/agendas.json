@@ -29,6 +29,16 @@
         "officeID": 1,
         "type": "Procurement Resolution",
         "committee": "Operations and Safety"
+      },
+      {
+        "id": 4,
+        "title": "Another Op and Safety Agenda",
+        "meetingID" : 2,
+        "status": "Edit Content from Contributors",
+        "statusCode": 30,
+        "officeID": 1,
+        "type": "Procurement Resolution",
+        "committee": "Operations and Safety"
       }
     ]
 }

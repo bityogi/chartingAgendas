@@ -105,6 +105,4 @@ agendaApp.controller('agendaChartsCtrl', ['$scope', '_', '$http', function ($sco
     };
 }]);
 
-agendaApp.controller('meetingChartsCtrl', ['$scope', function ($scope) {}]);
-
 agendaApp.controller('officeChartsCtrl', ['$scope', function ($scope) {}]);
