@@ -1,0 +1,13 @@
+{
+  "offices": [ {
+    "id": 1,
+    "title": "Rail and Bus Office"
+
+  },
+  {
+    "id": 2,
+    "title": "Police Department"
+  }
+
+  ]
+}

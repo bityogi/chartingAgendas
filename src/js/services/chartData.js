@@ -30,6 +30,22 @@ agendaApp.factory('chartData', ['$http', '$q', function($http, $q) {
 
       };
 
+      chartDataService.getAgendasForOffice = function getAgendasForOffice(office_id) {
+
+            return $q(function(resolve, reject) {
+              console.log('getAgendasForMeeting: office_id=', office_id);
+              $http.get('/data/agendas.json').then(function onSuccess(response) {
+
+                  var officeAgendas = _.filter(response.data.availableAgendas, (agenda) => { return agenda.officeID == office_id; });
+
+                  resolve(officeAgendas);
+
+              }, function onFailure(err) {
+                reject(err);
+              });
+            });
+
+          };
 
   chartDataService.getEventTimes = function getEventTimes(type) {
           return $q(function(resolve, reject) {
@@ -73,6 +89,16 @@ agendaApp.factory('chartData', ['$http', '$q', function($http, $q) {
             });
           };
 
+    chartDataService.getOffices = function getOffices() {
+            return $q(function(resolve, reject) {
+              $http.get('./data/offices.json').then(function onSuccess(response) {
+                resolve(response.data.offices);
+              }, function onFailure(err) {
+                reject(err);
+              });
+
+            });
+          };
 
     return chartDataService;
 }]);

@@ -1,4 +1,21 @@
-<div id="viewThree">
+<div id="officeCharts" ng-controller="officeChartsCtrl">
   <h1>Charts by Office</h1>
-  <p>In pellentesque faucibus vestibulum. Nulla at nulla justo, eget luctus tortor. Nulla facilisi. Duis aliquet egestas purus in blandit. Curabitur vulputate, ligula lacinia scelerisque tempor, lacus lacus ornare ante, ac egestas est urna sit amet arcu. Class aptent taciti sociosqu.</p>
+
+  <select name="office" id="offices" ng-model="offices.selectedOffice" ng-change="getChartData()">
+
+    <option value="{{office.id}}" ng-repeat="office in offices.availableOffices">{{office.title}}</option>
+
+  </select>
+
+  <br>
+
+
+  <div ng-repeat="agenda in agendas">
+    <chart-directive agenda-id="{{agenda.id}}">
+      <div id="container_{{agenda.id}}" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
+    </chart-directive>
+  </div>
+
+  <p></p>
+
 </div>
