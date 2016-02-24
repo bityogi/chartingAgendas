@@ -44,6 +44,17 @@ agendaApp.factory('chartData', ['$http', '$q', function($http, $q) {
             });
           };
 
+    chartDataService.getMeetings = function getMeetings() {
+            return $q(function(resolve, reject) {
+              $http.get('./data/meetings.json').then(function onSuccess(response) {
+                resolve(response.data.availableMeetings);
+              }, function onFailure(err) {
+                reject(err);
+              });
+
+            });
+          };
+
 
     return chartDataService;
 }]);

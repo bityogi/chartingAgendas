@@ -1,4 +1,20 @@
-<div id="viewTwo">
+<div id="meetingCharts" ng-controller="meetingChartsCtrl">
+
   <h1>Charts by Meeting</h1>
-  <p>Curabitur vulputate, ligula lacinia scelerisque tempor, lacus lacus ornare ante, ac egestas est urna sit amet arcu. Class aptent taciti sociosqu.</p>
+
+  <select name="meeting" id="meetings" ng-model="meeting.selectedMeeting" ng-change="getChartData()">
+
+    <option value="{{meeting.id}}" ng-repeat="meeting in meetings.availableMeetings">{{meeting.title}}</option>
+
+  </select>
+
+  <br>
+
+  <!-- <div>
+    <p ng-show="meetingIDForAgenda">MeetingID: {{meetingIDForAgenda}}</p>
+    <p ng-show="typeOfAgenda">Agenda Type: {{typeOfAgenda}}</p>
+    <p ng-show="agendaStatus">Agenda Status: {{agendaStatus}}</p>
+  </div> -->
+
+  <p></p>
 </div>
