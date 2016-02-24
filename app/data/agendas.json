@@ -14,8 +14,8 @@
         "id": 2,
         "title": "Business Management Agenda",
         "meetingID" : 3,
-        "status": "Start initial review workflow",
-        "statusCode": 40,
+        "status": "Edit Reviewers comments",
+        "statusCode": 50,
         "officeID": 2,
         "type": "Procurement Resolution",
         "committee": "Business Management"
@@ -24,8 +24,8 @@
         "id": 3,
         "title": "Op and Safety Agenda",
         "meetingID" : 2,
-        "status": "Agenda Created",
-        "statusCode": 10,
+        "status": "Edit Reviewers comments",
+        "statusCode": 50,
         "officeID": 1,
         "type": "Procurement Resolution",
         "committee": "Operations and Safety"

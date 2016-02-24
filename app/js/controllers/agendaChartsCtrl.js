@@ -79,7 +79,15 @@ agendaApp.controller('agendaChartsCtrl', ['$scope', '_', '$http', '$q', function
             var targetEvents = _.filter(eventTimes, event => {
                 return event.days <= daysDifference;
             });
-            //var target
+            var targetCode = _.sortBy(targetEvents, 'statusCode')[0].statusCode;
+
+            var targetColor = '';
+            if (agenda.statusCode < targetCode) {
+                targetColor = 'rgb(232, 60, 17)';
+            } else {
+                targetColor = 'rgb(137, 216, 59)';
+            }
+
             var seriesNames = _.map(eventTimes, 'event');
             var eventsOccured = _.filter(eventTimes, event => {
                 return event.statusCode <= agenda.statusCode;
@@ -120,9 +128,9 @@ agendaApp.controller('agendaChartsCtrl', ['$scope', '_', '$http', '$q', function
                 xAxis: {
                     categories: seriesNames,
                     plotBands: [{ // visualize the weekend
-                        from: targetEvents.length,
+                        from: eventTimes.length - targetEvents.length,
                         to: eventTimes.length,
-                        color: 'rgba(68, 170, 213, .2)'
+                        color: targetColor
                     }]
                 },
                 yAxis: {
